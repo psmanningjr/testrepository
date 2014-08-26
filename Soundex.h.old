@@ -1,0 +1,40 @@
+#ifndef SOUNDEX_H
+#include <string>
+
+using namespace std;
+
+class Soundex
+{
+public:
+	string encode(const string& word) const 
+	{
+		return zeroPad(head(word) + encodedDigits(word));
+	}	
+
+private:
+	string head(const string& word) const
+	{
+		return word.substr(0,1);
+	}
+
+	string encodedDigits(const string& word) const
+	{
+		if (word.length() >1)
+		{
+			return "1";
+		}
+		else
+		{
+			return "";
+		}
+	}
+
+	static const size_t MaxCode_Length{4};
+
+	string zeroPad(const string& word) const 
+	{
+		auto zerosNeeded = MaxCode_Length - word.length();
+		return word + string(zerosNeeded,'0');
+	}
+};
+#endif
